@@ -1,0 +1,37 @@
+.mainBody {
+    .div {
+
+}
+
+.gameGrid {
+  justify-content: space-evenly;
+  justify-items: center;
+  align-content: space-evenly;
+  align-items: center;
+  display: inline-grid;
+  grid-template-columns: auto;
+  grid-template-rows: 100px 100px 100px 100px;
+  grid-auto-flow: column;
+  grid-gap: 20px;
+  background-color: #4682b9;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.myText {
+  border-radius: 8px;
+  background-color: #646464;
+  border: 1px solid rgb(131, 21, 21);
+  padding: 20px;
+  font-size: 30px;
+}
+
+.gameTitle {
+  text-align: center;
+  font-size: xx-large;
+}
+
+.img1 {
+  height: 50px;
+  width: 50px;
+}
