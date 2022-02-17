@@ -1,58 +1,52 @@
 const gameCards = document.querySelectorAll(".GameCard");
 
 let isCardFlipped = false; //The default state for cards on load is not flipped
-let lockBoard = false; //Sets the board to be locked if another turn is in play.
+let lockBoard = false; //Sets the board to be locked if two cards are flipped.
 let firstCard, secondCard; //Declares a variable for the first and second card you will click to attempt to match.
+let cardFlippingSound = new Audio("./sounds/Card-flip-sound-effect.mp3"); //Sound for flipping a card.
+let cardsFlippingSound = new Audio("./sounds/Cards-flipping-sound-effect.mp3"); //Sound for flipping a card.
 
-// Sets a function for when a card is flipped or not.
-function flipCard() {
+function flipCard() /* Creates a function for when a card is flipped or not.*/ {
   if (lockBoard) {
-    //If the board is locked exit the function.
-    return;
+    return; /*If the board is locked exit the function.*/
   } else {
-    //Toggles and adds the flip class to the .GameCard class.
-    this.classList.toggle("flip");
-    console.log("I cliked it!");
-    //'this' is the div element that fired the event. In this case clicking on any 'GameCard' fires the event from the function.
+    this.classList.toggle("flip"); //Toggles and adds .flip class to the .GameCard class.
+    cardFlippingSound.play(); // Plays the sound for one card flipping
+
+    //'this' is the div element that fired the event. In this case clicking on any 'GameCard' executes the function.
     //Logs the div class for GameCard to GameCard.flip
     console.log("this.classList =:", this.classList);
-    console.log("div data card flipped:", this);
+    console.log("div data card flipped 'this' =:", this);
 
-    //If flipped card is false return the value of true for the first card flipped over.
+    //If flipped card is not true return the value of true for the first card flipped over.
     if (!isCardFlipped) {
-      //First click
+      //First card flipped over.
       isCardFlipped = true;
       firstCard = this;
       this.classList.toggle("first");
       const firstCardClicked = "first card";
-      console.log("First Card Clicked:", firstCard);
-      if (firstCardClicked) {
-        this.classList.toggle("first");
-      }
+      console.log("First Card Clicked:", firstCard); //console logs which card was clicked first.
     }
     //If the flipped card returns true the second card clicked is flipped over.
     else {
       isCardFlipped = false;
       secondCard = this;
-      this.classList.toggle("second");
+      console.log("Second Card Clicked:", secondCard); //console logs which card was clicked second.
 
-      console.log("Second Card Clicked:", secondCard);
+      console.log(firstCard.dataset.framework); //console logs the dataset framework class for the firstCard clicked.
+      console.log(secondCard.dataset.framework); //console logs the dataset framework class for the secondCard clicked.
 
-      //returns the dataset framework class for the firstCard clicked.
-      console.log(firstCard.dataset.framework);
       //returns the dataset framework class for the secondCard clicked.
-      console.log(secondCard.dataset.framework);
-
-      //If the first card is equal to the second card remove the mouse click listener.
       if (firstCard.dataset.framework === secondCard.dataset.framework) {
-        //Performs a check to see if this is equal to the firstCard variable.
+        //Performs a check to see if 'this' div is equal to the firstCard value.
         if (this === firstCard) {
-          console.log("div data same card unflipped:", this);
-          return;
+          console.log("div data same card unflipped:", this); //console logs the new value of 'this'.
+          return; //exits the function.
+        } else {
+          firstCard.removeEventListener("click", flipCard);
+          secondCard.removeEventListener("click", flipCard);
+          console.log("div data unflipped:", this);
         }
-        firstCard.removeEventListener("click", flipCard);
-        secondCard.removeEventListener("click", flipCard);
-        console.log("div data unflipped:", this);
       } else {
         //If the board is locked continue.
         lockBoard = true;
@@ -65,7 +59,8 @@ function flipCard() {
           secondCard.classList.remove("flip");
           //The board wil unlock once false.
           lockBoard = false;
-        }, 500);
+          cardsFlippingSound.play(); //// Plays the sound for two cards flipping
+        }, 500); //Adds a 500ms delay before flipping the cards back over.
       }
     }
   }
