@@ -10,7 +10,7 @@ function flipCard() /* Creates a function for when a card is flipped or not.*/ {
   if (lockBoard) {
     return; /*If the board is locked exit the function.*/
   } else {
-    this.classList.toggle("flip"); //Toggles and adds .flip class to the .GameCard class.
+    this.classList.add("flip"); //Toggles and adds .flip class to the .GameCard class.
     cardFlippingSound.play(); // Plays the sound for one card flipping
 
     //'this' is the div element that fired the event. In this case clicking on any 'GameCard' executes the function.
@@ -69,7 +69,7 @@ function flipCard() /* Creates a function for when a card is flipped or not.*/ {
 //Invoked Function wrapped in Parenethesis (function)(); meaning it will be executed directly after the definiton.
 (function shuffleCards() {
   gameCards.forEach((card) => {
-    let randomPosition = Math.floor(Math.random() * 12);
+    let randomPosition = Math.floor(Math.random() * 12); // 0-11
     card.style.order = randomPosition;
   });
 })();
