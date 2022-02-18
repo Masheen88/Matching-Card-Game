@@ -18,8 +18,8 @@
   width: 640px;
   height: 640px;
   margin: auto;
-  display: flex;
-  flex-wrap: wrap;
+  display: flex; /*Creates the grid patter from any divs in gameGrid*/
+  flex-wrap: wrap; /*Wraps any divs in gameGrid if they go past the gameGrid element*/
   padding-top: 8px;
   padding-bottom: 8px;
   border-radius: 8px;
@@ -28,7 +28,7 @@
 
 .GameCard {
   border-radius: 8px;
-  background-color: #858383;
+  background-color: #000000;
   border: 2px solid rgb(131, 21, 21);
   width: calc(25% - 10px);
   height: calc(25% - 10px);
@@ -53,8 +53,8 @@
 .card-back {
   width: 100%;
   height: 100%;
-  padding: 10px;
-  border-radius: 8px;
+  padding: 8px;
+  border-radius: 15px;
   position: absolute;
   backface-visibility: hidden;
 }
