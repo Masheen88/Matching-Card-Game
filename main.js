@@ -1,5 +1,4 @@
 const gameCards = document.querySelectorAll(".GameCard");
-
 let isCardFlipped = false; //The default state for cards on load is not flipped
 let lockBoard = false; //Sets the board to be locked if two cards are flipped.
 let firstCard, secondCard; //Declares a variable for the first and second card you will click to attempt to match.
